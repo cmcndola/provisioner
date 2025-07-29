@@ -28,6 +28,12 @@ variable "ssh_public_key_path" {
   default     = "~/.ssh/id_rsa.pub"
 }
 
+variable "colleague_ssh_public_key_path" {
+  description = "Path to colleague's SSH public key"
+  type        = string
+  default     = "~/.ssh/colleague_key.pub"
+}
+
 variable "server_name" {
   description = "Name for the server"
   type        = string

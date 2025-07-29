@@ -9,6 +9,7 @@ users:
     sudo: ["ALL=(ALL) NOPASSWD:ALL"]
     ssh_authorized_keys:
       - ${ssh_public_key}
+      - ${colleague_ssh_public_key}
 
 # Update package lists
 package_update: true

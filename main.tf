@@ -42,6 +42,7 @@ resource "hcloud_server" "ubuntu_server" {
   user_data = templatefile("${path.module}/cloud-init.yml", {
     username       = var.user_name
     ssh_public_key = file(var.ssh_public_key_path)
+    colleague_ssh_public_key = file(var.colleague_ssh_public_key_path)
     server_name    = var.server_name
   })
 
