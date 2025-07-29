@@ -66,7 +66,7 @@ resource "hcloud_server" "ubuntu_server" {
 
 # Create a basic firewall
 resource "hcloud_firewall" "web_firewall" {
-  name = "web-firewall"
+  name = "core-firewall"
 
   # SSH access - conditionally restrict by IP based on user preference
   rule {
