@@ -4,7 +4,6 @@ This repository contains Terraform configurations to automate the provisioning o
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Prerequisites](#prerequisites)
 - [Setup](#setup)
@@ -28,7 +27,7 @@ This repository contains Terraform configurations to automate the provisioning o
 1. **Clone this repository**
 
    ```bash
-   git clone https://github.com/engineervix/provisioner.git
+   git clone https://github.com/cmcndola/provisioner.git
    cd provisioner
    ```
 
@@ -42,11 +41,13 @@ This repository contains Terraform configurations to automate the provisioning o
    ```
 
    Make sure to:
+
    - Add your Hetzner Cloud API token
    - Specify the correct path to your Public SSH key
    - Set your preferred server name and location
 
    **Security Note**: By default, SSH access is not restricted by IP address since the assumption is that most users have dynamic IPs. The configuration relies on:
+
    - SSH key-based authentication (no password access)
    - Fail2ban for protection against brute force attempts
    - UFW firewall as a backup security measure
@@ -58,10 +59,10 @@ This repository contains Terraform configurations to automate the provisioning o
    ```bash
    # Start the SSH agent if not running
    eval "$(ssh-agent -s)"
-   
+
    # Add your private key to the agent (you'll be prompted for the password once)
    ssh-add ~/.ssh/id_rsa
-   
+
    # Verify your key was added
    ssh-add -l
    ```
@@ -104,11 +105,13 @@ This repository contains Terraform configurations to automate the provisioning o
 This configuration offers three levels of protection for your server:
 
 1. **Hetzner Cloud API Delete Protection** (`delete_protection = true`):
+
    - Prevents deletion via the Hetzner Cloud API
    - Can be disabled through the Hetzner Cloud Console or API
-   - *Note*: This does not prevent deletion by Terraform itself, as Terraform will automatically lift this lock
+   - _Note_: This does not prevent deletion by Terraform itself, as Terraform will automatically lift this lock
 
 2. **Hetzner Cloud API Rebuild Protection** (`rebuild_protection = true`):
+
    - Prevents rebuilding the server via the Hetzner Cloud API
    - Can be disabled through the Hetzner Cloud Console or API
 
@@ -118,6 +121,7 @@ This configuration offers three levels of protection for your server:
    - Disabled by default to prevent lockout scenarios
 
 You can configure these protection levels in the `terraform.tfvars` file.
+
 - Initial security hardening
 - Installation of essential packages
 - Configuration of unattended upgrades
@@ -135,21 +139,25 @@ After provisioning, you may want to:
 To verify that everything was installed properly by cloud-init:
 
 1. **Check cloud-init status**
+
    ```bash
    cloud-init status
    ```
 
 2. **View the main cloud-init log file**
+
    ```bash
    sudo cat /var/log/cloud-init.log
    ```
 
 3. **Check command outputs and errors**
+
    ```bash
    sudo cat /var/log/cloud-init-output.log
    ```
 
 4. **Get a detailed analysis of the cloud-init run**
+
    ```bash
    sudo cloud-init analyze show
    ```
