@@ -4,7 +4,7 @@ hostname: ${server_name}
 # Create users
 users:
   - name: ${username}
-    groups: sudo,docker
+    groups: sudo
     shell: /bin/zsh
     sudo: ["ALL=(ALL) NOPASSWD:ALL"]
     ssh_authorized_keys:
@@ -51,14 +51,9 @@ runcmd:
   - systemctl enable fail2ban
   - systemctl start fail2ban
 
-  # Verify Docker is running properly
-  - systemctl status docker
-  - docker --version
-  - docker compose version
-
-  # Install ctop (https://github.com/bcicen/ctop)
-  - wget https://github.com/bcicen/ctop/releases/download/v0.7.7/ctop-0.7.7-linux-arm64 -O /usr/local/bin/ctop
-  - chmod +x /usr/local/bin/ctop
+  # Verify system is running properly
+  - systemctl status systemd-resolved
+  - systemctl status systemd-networkd
 
   # SSH hardening
   - cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak

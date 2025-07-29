@@ -1,6 +1,6 @@
 # Hetzner Server Provisioning Automation
 
-This repository contains Terraform configurations to automate the provisioning of a Hetzner Cloud server with Docker CE pre-installed.
+This repository contains Terraform configurations to automate the provisioning of a Hetzner Cloud server with Ubuntu 24.04.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -8,7 +8,6 @@ This repository contains Terraform configurations to automate the provisioning o
 
 - [Prerequisites](#prerequisites)
 - [Setup](#setup)
-- [Docker CE Pre-installed](#docker-ce-pre-installed)
 - [Server Protection](#server-protection)
 - [Next Steps](#next-steps)
 - [Verifying Cloud-Init Installation](#verifying-cloud-init-installation)
@@ -100,15 +99,6 @@ This repository contains Terraform configurations to automate the provisioning o
 > [!NOTE]  
 > You might be prompted to reboot after initial login.
 
-## Docker CE Pre-installed
-
-This configuration uses Hetzner's [Docker CE](https://docs.hetzner.com/cloud/apps/list/docker-ce/) app image which comes with:
-- Ubuntu 24.04 as the base OS
-- Docker pre-installed and configured
-- Docker Compose plugin pre-installed
-
-You can start using Docker commands immediately after server provisioning.
-
 ## Server Protection
 
 This configuration offers three levels of protection for your server:
@@ -137,8 +127,8 @@ You can configure these protection levels in the `terraform.tfvars` file.
 After provisioning, you may want to:
 
 1. Run your Ansible playbooks for further configuration
-2. Deploy Docker containers for your applications
-3. Configure a reverse proxy such as Traefik, Caddy, NGiИX, etc.
+2. Deploy your applications
+3. Configure a reverse proxy such as Traefik, Caddy, NGINX, etc.
 
 ## Verifying Cloud-Init Installation
 
@@ -190,5 +180,4 @@ Type 'yes' when prompted to destroy the resources.
 - The root password authentication is disabled by default
 - Only the non-root user specified in the variables can log in via SSH with the specified key
 - Make sure to keep your terraform.tfvars file secure as it contains sensitive information
-- The user is automatically added to the `docker` group and can run docker commands without sudo
 - This configuration uses SSH agent for provisioning, allowing the use of password-protected SSH keys
